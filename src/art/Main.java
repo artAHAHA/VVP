@@ -1,48 +1,37 @@
 package art;
 
 
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        int[] a = new int[]{1,213,321,1,23,312,321,321,1,1,321};
-        int count = 1;
-        int maxCount = 0;
-        int element = 0;
-        int index = -1;
-        for (int i = 0; i < a.length; i++) {
-            for (int j = i+1; j < a.length; j++) {
-                if (a[i] == a[j]) {
-                    count++;
-                }
-            }
-            if (count > maxCount) {
-                maxCount = count;
-                count = 1;
-                element = a[i];
+        Integer[] array = {1, 2, 3, -1, -3, 7, 0, 4, -5};
+        ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(array));
 
-            } else if (count == maxCount && a[i] > element) {
-                count = 1;
-                element = a[i];
+        System.out.println(solve(list));
+    }
+
+    public static List<Integer> solve(List<Integer> list) {
+        List<Integer> glist = new ArrayList<>();
+        int k = 0;
+        int m = 0;
+        for (int arg : list) {
+            if (k == 0) {
+                k += 1;
+                m = arg;
             } else {
-                count = 1;
-            }
-
-        }
-        count = maxCount;
-        if (count >= 2) {
-            for (int i = 0; i < a.length; i++) {
-                if (a[i] == element) {
-                    count--;
+                if (m > arg) {
+                    glist.add(arg);
+                } else {
+                    glist.add(m);
                 }
-                if (count == 1) {
-                    index = i;
-                    break;
-                }
+                k = 0;
             }
         }
-
-
-        System.out.println("Count: " + maxCount);
-        System.out.println("Element: " + element);
-        System.out.println("Index: " + index);
+        if (list.size()%2 != 0){
+            glist.add(list.get(list.size()-1));
+        }
+        return glist;
     }
 }
+

@@ -142,8 +142,9 @@ public class FrameMainTask10 extends JFrame {
                         double x = matrix[i][0];
                         double y = matrix[i][1];
                         double radius = matrix[i][2];
-
-                        circles.add(new Circle(x, y, radius));
+                        if (radius > 0) {
+                            circles.add(new Circle(x, y, radius));
+                        }
                     }
                     Circle maxNestedCircle = Solution10.findMaxNestedCircles(circles);
 
